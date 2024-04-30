@@ -43,6 +43,12 @@ function App() {
       const place = AVAILABLE_PLACES.find((place) => place.id === id);
       return [place, ...prevPickedPlaces];
     });
+
+    // This code is a sideEffect
+    const storedIds = JSON.parse(localStorage.getItem('selectedPlace')) || [];
+    if (storedIds.indexOf(id) !== -1) {
+      localStorage.setItem('selectedPlace', JSON.stringify([id, ...storedIds]));
+    }
   }
 
   function handleRemovePlace() {
